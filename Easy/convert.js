@@ -13,8 +13,13 @@ If you get stuck on a challenge, find help in the Resources tab.
 If you're really stuck, unlock solutions in the Solutions tab.
 */
 
-function convert(/*args*/) {
-  //your code
+function convert(hours, minutes) {
+  if (typeof hours !== "number" || typeof minutes !== "number") {
+    return 0;
+  }
+  hours %= 12;
+  minutes %= 60;
+  return (hours * 60 + minutes) * 60;
 }
 
 exports.solution = convert;
