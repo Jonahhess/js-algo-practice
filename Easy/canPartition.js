@@ -13,8 +13,14 @@ The array may contain duplicates.
 Multiple solutions can exist, any solution is sufficient to return true.
 */
 
-function canPartition( /*args*/ ) {
-  //your code
+function canPartition(arr) {
+  const products = arr.reduce((product, cur) => product * cur, 1);
+  for (const element of arr) {
+    if (products / element === element) {
+      return true;
+    }
+  }
+  return false;
 }
 
 exports.solution = canPartition;
