@@ -35,8 +35,20 @@ champions([
 ➞ "Manchester United"
 */
 
-function champions( /*args*/ ) {
-  //your code
+function champions(objArr) {
+  const fns = [
+    (team) => 3 * team.wins + team.draws,
+    (team) => team.scored - team.conceded,
+  ];
+
+  let pool = objArr;
+  for (const fn of fns) {
+    if (pool.length < 2) return pool[0]?.name;
+    const best = Math.max(...pool.map((team) => fn(team)));
+    pool = pool.filter((team) => fn(team) === best);
+  }
+
+  return pool.map((team) => team.name)[0];
 }
 
 exports.solution = champions;
