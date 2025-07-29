@@ -33,11 +33,6 @@ Notes
 The highest score has a rank value of 1..
 */
 
-// idea: rank = number of scores greater than me, plus 1
-// efficiency #1: we only need to consider the scores greater than me
-// efficiency #2: since 1 <= #(scores) <= names, sort by scores
-// efficiency #3: if scores is a fixed range such as 0-100, sorting is O(1)
-
 // solution
 
 function competitionRank(scores, nameToRank) {
@@ -54,6 +49,11 @@ function competitionRank(scores, nameToRank) {
 }
 
 exports.solution = competitionRank;
+
+// idea: rank = number of scores greater than me, plus 1
+// efficiency #1: we only need to consider the scores greater than me
+// efficiency #2: since 1 <= #(scores) <= names, sort by scores
+// efficiency #3: if scores is a fixed range such as 0-100, sorting is O(1)
 
 // original solution (better since it has error checks)
 
