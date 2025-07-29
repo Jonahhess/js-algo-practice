@@ -55,15 +55,14 @@ function competitionRank(scores, nameToRank) {
 
 // end of solution
 
-//
+// original solution (better since it has error checks)
 
-function competitionRankOriginal(scores, nameToRank) {
+function competitionRank1(scores, nameToRank) {
   if (!(nameToRank in scores)) {
     return 0;
   }
 
   const scoreToRank = scores[nameToRank];
-
   const relevantValues = Object.values(scores).filter(
     (v) => typeof v === "number" && v > scoreToRank
   );
@@ -77,7 +76,7 @@ function competitionRankOriginal(scores, nameToRank) {
   return sortedEntries.map(([, v]) => v).reduce((a, b) => a + b, 0) + 1;
 }
 
-//
+// end of original
 
 // Without Safety checks
 
@@ -95,7 +94,7 @@ function competitionRank2(scores, nameToRank) {
 
 // golf with comments
 
-function competitionRank1(scores, nameToRank) {
+function competitionRank3(scores, nameToRank) {
   return (
     // 4. turn counter into [score, occurrences] pairs
     Object.entries(
