@@ -36,7 +36,7 @@ The highest score has a rank value of 1..
 // idea: rank = number of scores greater than me, plus 1
 // efficiency #1: we only need to consider the scores greater than me
 // efficiency #2: since 1 <= #(scores) <= names, sort by scores
-// efficiency #3: scores are usually a fixed range, so sorting can be O(1)
+// efficiency #3: if scores is a fixed range such as 0-100, sorting is O(1)
 
 // solution
 
@@ -53,7 +53,7 @@ function competitionRank(scores, nameToRank) {
   );
 }
 
-// end of solution
+exports.solution = competitionRank;
 
 // original solution (better since it has error checks)
 
@@ -107,5 +107,3 @@ function competitionRank3(scores, nameToRank) {
       .reduce((a, b) => a + b, 0) + 1 // 7. sum occurrences and add 1
   );
 }
-
-exports.solution = competitionRank;
