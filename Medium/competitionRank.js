@@ -36,16 +36,7 @@ The highest score has a rank value of 1..
 // solution
 
 function competitionRank(scores, nameToRank) {
-  return (
-    Object.entries(
-      Object.values(scores)
-        .filter((v) => v > scores[nameToRank])
-        .reduce((ac, a) => ((ac[a] = ac[a] + 1 || 1), ac), {})
-    )
-      .sort(([a], [b]) => b - a)
-      .map(([, v]) => v)
-      .reduce((a, b) => a + b, 0) + 1
-  );
+  return Object.values(scores).filter((v) => v > scores[nameToRank]) + 1;
 }
 
 exports.solution = competitionRank;
@@ -66,14 +57,7 @@ function competitionRank1(scores, nameToRank) {
   const relevantValues = Object.values(scores).filter(
     (v) => typeof v === "number" && v > scoreToRank
   );
-
-  const counter = relevantValues.reduce(
-    (ac, a) => ((ac[a] = ac[a] + 1 || 1), ac),
-    {}
-  );
-
-  const sortedEntries = Object.entries(counter).sort(([a], [b]) => b - a);
-  return sortedEntries.map(([, v]) => v).reduce((a, b) => a + b, 0) + 1;
+  return relevantValues.length + 1;
 }
 
 // end of original
