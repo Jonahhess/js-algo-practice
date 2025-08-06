@@ -43,8 +43,36 @@ The today parameter will always be greater than or equal to the last date in the
 An empty array should return 0.
 */
 
-function currentStreak( /*args*/ ) {
-  //your code
+function isConsecutive(prev, cur) {
+  const d1 = new Date(prev);
+  const d2 = new Date(cur);
+
+  return d1.getDate() + 1 === d2.getDate() || d2.getDate() ===
+}
+
+function indexInRange(index, min, max) {
+  return index >= min && index <= max;
+}
+
+// date format: {date: "2025-05-21"}
+function currentStreak(startDate, dateArray) {
+  const startIndex = dateArray.find((d) => d.date === startDate);
+
+  let counter = 0;
+  for (let i = 1; i < dateArray.length; i++) {
+    const prev = dateArray[i - 1].date;
+    const cur = dateArray[i].date;
+
+    if (isConsecutive(prev, cur)) {
+      counter++;
+    } else if (indexInRange(startIndex, i - counter, i)) {
+      return counter;
+    } else {
+      counter = 0;
+    }
+  }
+
+  return counter;
 }
 
 exports.solution = currentStreak;
