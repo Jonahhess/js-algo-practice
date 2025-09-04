@@ -17,7 +17,7 @@ Vowels are: a, e, i, o, u.
 
 const vowels = ["a", "e", "i", "o", "u"];
 
-function distanceToNearestVowel2(str) {
+function distanceToNearestVowel(str) {
   const len = str.length;
 
   const distanceArr = [];
@@ -48,7 +48,7 @@ function distanceToNearestVowel2(str) {
   return distanceArr;
 }
 
-function distanceToNearestVowel(str) {
+function distanceToNearestVowel2(str) {
   const splits = str.split(/([aeiou])/);
   const len = splits.length;
   const distanceArr = [];

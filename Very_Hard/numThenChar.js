@@ -30,8 +30,21 @@ Notes
 Test cases will containg integer and float numbers and single letters.
 */
 
-function numThenChar( /*args*/ ) {
-  //your code
+function numThenChar(arr) {
+  const allValues = arr.flat(1);
+
+  // sort backwards in order to use pop later
+  allValues.sort((a, b) => {
+    if (typeof a === typeof b) {
+      return typeof a === "string" ? b.charCodeAt(0) - a.charCodeAt(0) : b - a;
+    }
+    return typeof a === "number" ? 1 : -1;
+  });
+
+  arr.forEach((inner) =>
+    inner.forEach((_, index) => (inner[index] = allValues.pop()))
+  );
+  return arr;
 }
 
 exports.solution = numThenChar;

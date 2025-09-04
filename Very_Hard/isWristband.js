@@ -41,8 +41,40 @@ isWristband([
 // Part of diagonal right wristband.
 */
 
-function isWristband( /*args*/ ) {
-  //your code
+function verticalCheck(matrix, offset) {
+  return matrix.every(
+    (row, rIndex, array) =>
+      !rIndex ||
+      row.every((element, index) => {
+        return (
+          array[rIndex - 1][index + offset * rIndex] === undefined ||
+          array[rIndex - 1][index + offset * rIndex] === element
+        );
+      })
+  );
 }
+
+function isWristband(matrix) {
+  if (
+    matrix.every((row) => {
+      const firstElement = row[0];
+      return row.every((element) => element === firstElement);
+    })
+  ) {
+    return true;
+  }
+
+  const offsets = [-1, 0, 1];
+  return offsets.some((offset) => verticalCheck(matrix, offset));
+}
+
+// const failTest = [
+//   ["A", "B", "C"],
+//   ["B", "A", "B"],
+//   ["D", "C", "A"],
+//   ["E", "D", "C"],
+// ];
+
+// isWristband(failTest);
 
 exports.solution = isWristband;
