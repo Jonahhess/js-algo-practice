@@ -21,8 +21,32 @@ matrix(4) ➞ [
 ]
 */
 
-function matrix( /*args*/ ) {
-  //your code
+function fillSpot(matrix, x, y, count) {
+  if (matrix[x][y] !== 0) {
+    throw new Error(`out of bounds / attempted to refill index at ${x}-${y}`);
+  }
+  matrix[x][y] = count;
+}
+
+function fillLayer(matrix, left, run, startingNumber) {
+  let count = startingNumber;
+
+  // top row
+
+  // right column
+
+  // bottom row
+
+  // left column
+}
+
+function matrix(num) {
+  const matrix = [new Array(num).fill(new Array(num).fill(0))];
+  const layers = Math.floor(num / 2);
+
+  for (let i = 0; i < layers; i++) {
+    fillLayer(matrix, i, num - i, 1);
+  }
 }
 
 exports.solution = matrix;
