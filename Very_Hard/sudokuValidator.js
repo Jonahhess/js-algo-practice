@@ -30,8 +30,46 @@ sudokuValidator([
 ]) ➞ false
 */
 
-function sudokuValidator(/*args*/) {
-  //your code
+function checkRow(sudokuBoard, row, boxLength) {
+  return new Set(sudokuBoard[row]).size === boxLength;
+}
+
+function checkColumn(sudokuBoard, col, boxLength) {
+  return new Set(sudokuBoard.map((row) => row[col])).size === boxLength;
+}
+
+function checkBox(sudokuBoard, row, col, boxSize) {
+  return (
+    new Set(
+      sudokuBoard
+        .filter((_, index) => index >= row && index < row + boxSize)
+        .map((row) =>
+          row.filter((_, index) => index >= col && index < col + boxSize)
+        )
+        .flat()
+    ).size === 9
+  );
+}
+
+function sudokuValidator(sudokuBoard, boxSize = 3) {
+  const boxLength = boxSize * boxSize;
+  for (let i = 0; i < boxLength; i++) {
+    if (
+      !checkRow(sudokuBoard, i, boxLength) ||
+      !checkColumn(sudokuBoard, i, boxLength)
+    ) {
+      return false;
+    }
+  }
+
+  for (let row = 0; row < boxLength; row = row + boxSize) {
+    for (let col = 0; col < boxLength; col = col + boxSize) {
+      if (!checkBox(sudokuBoard, row, col, boxSize)) {
+        return false;
+      }
+    }
+  }
+  return true;
 }
 
 exports.solution = sudokuValidator;
