@@ -30,41 +30,38 @@ sudokuValidator([
 ]) ➞ false
 */
 
-function checkRow(sudokuBoard, row, boxLength) {
-  return new Set(sudokuBoard[row]).size === boxLength;
-}
-
-function checkColumn(sudokuBoard, col, boxLength) {
-  return new Set(sudokuBoard.map((row) => row[col])).size === boxLength;
-}
-
-function checkBox(sudokuBoard, row, col, boxSize) {
-  return (
-    new Set(
-      sudokuBoard
-        .filter((_, index) => index >= row && index < row + boxSize)
-        .map((row) =>
-          row.filter((_, index) => index >= col && index < col + boxSize)
-        )
-        .flat()
-    ).size === 9
-  );
+function sameSet(set1, set2) {
+  return !set1.symmetricDifference(set2).size;
 }
 
 function sudokuValidator(sudokuBoard, boxSize = 3) {
-  const boxLength = boxSize * boxSize;
-  for (let i = 0; i < boxLength; i++) {
+  const length = boxSize * boxSize;
+  const elements = new Set(Array.from({ length }, (_, i) => 1 + i));
+
+  for (let i = 0; i < length; i++) {
     if (
-      !checkRow(sudokuBoard, i, boxLength) ||
-      !checkColumn(sudokuBoard, i, boxLength)
+      !sameSet(new Set(sudokuBoard[i]), elements) ||
+      !sameSet(new Set(sudokuBoard.map((row) => row[i])), elements)
     ) {
       return false;
     }
   }
 
-  for (let row = 0; row < boxLength; row = row + boxSize) {
-    for (let col = 0; col < boxLength; col = col + boxSize) {
-      if (!checkBox(sudokuBoard, row, col, boxSize)) {
+  for (let row = 0; row < length; row = row + boxSize) {
+    for (let col = 0; col < length; col = col + boxSize) {
+      if (
+        !sameSet(
+          new Set(
+            sudokuBoard
+              .filter((_, index) => index >= row && index < row + boxSize)
+              .map((row) =>
+                row.filter((_, index) => index >= col && index < col + boxSize)
+              )
+              .flat()
+          ),
+          elements
+        )
+      ) {
         return false;
       }
     }
